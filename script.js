@@ -1,41 +1,34 @@
-// Matrix Rain Effect
-function createMatrixRain() {
+// Modern floating elements animation
+function createModernBackground() {
     const matrixContainer = document.getElementById('matrix-rain');
-    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?';
+    const phrases = ['Vacances', 'Détente', 'Repos', 'Soleil', 'Plage', 'Chill', 'Relax', 'Pause'];
     
-    function createMatrixColumn() {
-        const column = document.createElement('div');
-        column.style.position = 'absolute';
-        column.style.left = Math.random() * 100 + '%';
-        column.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        column.style.animationDelay = Math.random() * 2 + 's';
+    function createFloatingElement() {
+        const element = document.createElement('div');
+        element.className = 'matrix-char';
+        element.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+        element.style.left = Math.random() * 100 + '%';
+        element.style.top = Math.random() * 100 + '%';
+        element.style.animationDuration = (Math.random() * 10 + 8) + 's';
+        element.style.animationDelay = Math.random() * 2 + 's';
         
-        for (let i = 0; i < 20; i++) {
-            const char = document.createElement('div');
-            char.className = 'matrix-char';
-            char.textContent = characters[Math.floor(Math.random() * characters.length)];
-            char.style.top = (i * 20) + 'px';
-            char.style.animationDelay = (Math.random() * 2) + 's';
-            column.appendChild(char);
-        }
+        matrixContainer.appendChild(element);
         
-        matrixContainer.appendChild(column);
-        
-        // Remove column after animation completes
+        // Remove element after animation
         setTimeout(() => {
-            if (column.parentNode) {
-                column.parentNode.removeChild(column);
+            if (element.parentNode) {
+                element.parentNode.removeChild(element);
             }
-        }, 8000);
+        }, 15000);
     }
     
-    // Create initial columns
-    for (let i = 0; i < 20; i++) {
-        setTimeout(createMatrixColumn, i * 200);
+    // Create initial elements
+    for (let i = 0; i < 8; i++) {
+        setTimeout(createFloatingElement, i * 500);
     }
     
-    // Continuously create new columns
-    setInterval(createMatrixColumn, 300);
+    // Continuously create new elements
+    setInterval(createFloatingElement, 2000);
 }
 
 // Update uptime counter
@@ -123,19 +116,19 @@ function addGlitchEffect() {
     });
 }
 
-// Random terminal commands
+// Random modern commands
 function showRandomCommands() {
     const commands = [
-        'ping vacation.exe',
-        'sudo apt-get install relaxation',
-        'chmod +x fun_mode.sh',
-        'git checkout holiday-branch',
-        'docker run --rm -it vacation:latest',
-        'npm install @vacation/chill',
-        'python -m vacation --infinite',
-        'curl -X GET https://api.rest.com/v1/recharge',
-        'systemctl start vacation.service',
-        'journalctl -u vacation.service --follow'
+        'vacation start --mode=relax',
+        'status check --current',
+        'notification disable --work',
+        'mode switch --to=beach',
+        'schedule clear --all',
+        'autoresponder enable',
+        'stress-level set --to=zero',
+        'fun-mode activate',
+        'work-mode suspend',
+        'energy recharge --full'
     ];
     
     const commandElement = document.querySelector('.command-text');
@@ -148,7 +141,7 @@ function showRandomCommands() {
 
 // Dynamic status updates
 function updateStatus() {
-    const statusValues = ['VACATION_MODE', 'CHILL_MODE', 'RELAX_MODE', 'BEACH_MODE', 'SLEEP_MODE'];
+    const statusValues = ['EN VACANCES', 'MODE DÉTENTE', 'PAUSE ACTIVE', 'RESSOURCEMENT', 'DÉCONNECTÉ'];
     const statusElement = document.querySelector('.neon-green');
     
     setInterval(() => {
@@ -252,19 +245,19 @@ function addButtonEffects() {
     });
 }
 
-// Generate random vacation quotes
+// Generate modern vacation quotes
 function showVacationQuotes() {
     const quotes = [
         "Rechargement des batteries en cours... 🔋",
         "Mode plage activé 🏖️",
         "Détection de soleil et de détente... ☀️",
         "Système de stress: DÉSACTIVÉ ✅",
-        "Niveau de relaxation: MAXIMUM 📈",
+        "Niveau de relaxation: OPTIMAL 📈",
         "Statut: Bronzage en cours... 🌞",
         "Connexion WiFi: Optionnelle 📶",
         "Mode avion: ACTIVÉ ✈️",
-        "Réveils: SUSPENDUS ⏰",
-        "Emails: EN QUARANTAINE 📧"
+        "Réveil: EN PAUSE ⏰",
+        "Emails: EN ATTENTE 📧"
     ];
     
     const subMessageElement = document.querySelector('.sub-message');
@@ -313,7 +306,7 @@ function addKonamiCode() {
 document.addEventListener('DOMContentLoaded', () => {
     // Wait a bit for CSS to load
     setTimeout(() => {
-        createMatrixRain();
+        createModernBackground();
         updateUptime();
         animateVacationProgress();
         addGlitchEffect();

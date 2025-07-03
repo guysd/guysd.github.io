@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mode Vacances - Système Temporairement Indisponible</title>
+    <title>Mode Vacances - Actuellement Indisponible</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="matrix-rain" id="matrix-rain"></div>
@@ -20,52 +20,52 @@
                     <span class="btn yellow"></span>
                     <span class="btn green"></span>
                 </div>
-                <div class="terminal-title">SYSTEM_STATUS.exe</div>
+                <div class="terminal-title">Status Dashboard</div>
             </div>
             
             <div class="terminal-content">
                 <div class="status-line">
-                    <span class="prompt">root@guysd:~$</span>
-                    <span class="command">system_status --check</span>
+                    <span class="prompt">admin@vacances:~$</span>
+                    <span class="command">status --current</span>
                 </div>
                 
                 <div class="loading-container">
-                    <div class="loading-text">Analyse du système en cours</div>
+                    <div class="loading-text">Vérification du statut en cours</div>
                     <div class="loading-bar">
                         <div class="loading-progress"></div>
                     </div>
                 </div>
                 
                 <div class="status-message">
-                    <div class="error-code">[ERROR_CODE: 418]</div>
+                    <div class="error-code">[STATUS: 418]</div>
                     <div class="main-message">
-                        <span class="neon-text">SYSTÈME EN MODE VACANCES</span>
+                        <span class="neon-text">ACTUELLEMENT EN VACANCES</span>
                     </div>
                     <div class="sub-message">
-                        L'administrateur système est actuellement en mode déconnecté<br>
-                        Processus de détente et de rechargement en cours...
+                        Je suis actuellement en mode déconnecté<br>
+                        Processus de détente et de ressourcement en cours...
                     </div>
                 </div>
                 
                 <div class="vacation-info">
                     <div class="info-grid">
                         <div class="info-item">
-                            <div class="info-label">STATUS:</div>
-                            <div class="info-value neon-green">VACATION_MODE</div>
+                            <div class="info-label">Statut:</div>
+                            <div class="info-value neon-green">EN VACANCES</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label">UPTIME:</div>
-                            <div class="info-value" id="uptime">∞ days</div>
+                            <div class="info-label">Disponibilité:</div>
+                            <div class="info-value" id="uptime">∞ jours</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label">NEXT_BOOT:</div>
-                            <div class="info-value neon-cyan">BIENTÔT™</div>
+                            <div class="info-label">Retour:</div>
+                            <div class="info-value neon-cyan">BIENTÔT</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-section">
-                    <div class="contact-title">PROTOCOLES DE CONTACT D'URGENCE</div>
+                    <div class="contact-title">Moyens de Contact</div>
                     <div class="contact-info">
                         <div class="contact-item">
                             <span class="contact-icon">📧</span>
@@ -79,7 +79,7 @@
                 </div>
                 
                 <div class="progress-section">
-                    <div class="progress-title">PROGRESSION DES VACANCES</div>
+                    <div class="progress-title">Progression des Vacances</div>
                     <div class="progress-bar-container">
                         <div class="progress-bar">
                             <div class="progress-fill" id="vacation-progress"></div>
@@ -90,8 +90,8 @@
                 
                 <div class="footer-commands">
                     <div class="command-line">
-                        <span class="prompt">root@guysd:~$</span>
-                        <span class="command-text typing-animation">enjoy_vacation --maximize-fun</span>
+                        <span class="prompt">admin@vacances:~$</span>
+                        <span class="command-text typing-animation">enjoy_vacation --relax-mode</span>
                         <span class="cursor">|</span>
                     </div>
                 </div>
@@ -99,9 +99,9 @@
         </div>
         
         <div class="floating-elements">
-            <div class="floating-code">01010110 01000001 01000011 01000001 01001110 01000011 01000101 01010011</div>
-            <div class="floating-warning">⚠️ DÉTENTE MAXIMALE DÉTECTÉE</div>
-            <div class="floating-status">● HORS LIGNE</div>
+            <div class="floating-code">Vacances en cours...</div>
+            <div class="floating-warning">🌴 Mode détente activé</div>
+            <div class="floating-status">● Temporairement absent</div>
         </div>
     </div>
     
