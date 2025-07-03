@@ -1,350 +1,216 @@
-// Modern floating elements animation
-function createModernBackground() {
-    const matrixContainer = document.getElementById('matrix-rain');
-    const phrases = ['Vacances', 'Détente', 'Repos', 'Soleil', 'Plage', 'Chill', 'Relax', 'Pause'];
+// Modern vacation page functionality
+document.addEventListener('DOMContentLoaded', () => {
+    updateVacationProgress();
+    updateDaysCount();
+    setupContactButton();
     
-    function createFloatingElement() {
-        const element = document.createElement('div');
-        element.className = 'matrix-char';
-        element.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-        element.style.left = Math.random() * 100 + '%';
-        element.style.top = Math.random() * 100 + '%';
-        element.style.animationDuration = (Math.random() * 10 + 8) + 's';
-        element.style.animationDelay = Math.random() * 2 + 's';
-        
-        matrixContainer.appendChild(element);
-        
-        // Remove element after animation
-        setTimeout(() => {
-            if (element.parentNode) {
-                element.parentNode.removeChild(element);
-            }
-        }, 15000);
-    }
-    
-    // Create initial elements
-    for (let i = 0; i < 8; i++) {
-        setTimeout(createFloatingElement, i * 500);
-    }
-    
-    // Continuously create new elements
-    setInterval(createFloatingElement, 2000);
-}
+    // Update progress every hour
+    setInterval(updateVacationProgress, 3600000);
+    setInterval(updateDaysCount, 86400000); // Update daily
+});
 
-// Update uptime counter
-function updateUptime() {
-    const uptimeElement = document.getElementById('uptime');
-    const startDate = new Date('2024-01-01'); // Vous pouvez changer cette date
-    const now = new Date();
-    const diffTime = Math.abs(now - startDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    
-    uptimeElement.textContent = `${diffDays} jours`;
-}
-
-// Animate vacation progress based on real dates
-function animateVacationProgress() {
+// Calculate and update vacation progress
+function updateVacationProgress() {
     const progressFill = document.getElementById('vacation-progress');
-    const progressText = document.querySelector('.progress-text');
+    const progressText = document.getElementById('progress-text');
+    const progressPercentage = document.getElementById('progress-percentage');
     
-    // Dates de vacances réelles
-    const vacationStart = new Date('2025-07-04'); // 4 juillet 2025
-    const vacationEnd = new Date('2025-08-04');   // 4 août 2025
+    // Vacation dates
+    const vacationStart = new Date('2025-07-04');
+    const vacationEnd = new Date('2025-08-04');
     const now = new Date();
     
-    // Calculer la progression réelle
+    // Calculate progress
     const totalDuration = vacationEnd - vacationStart;
     const elapsed = now - vacationStart;
     let realProgress = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
     
-    // Déterminer le statut et la classe CSS
     let statusText = '';
     let progressClass = '';
     
     if (now < vacationStart) {
-        // Avant les vacances
-        const daysUntilVacation = Math.ceil((vacationStart - now) / (1000 * 60 * 60 * 24));
-        statusText = `Départ dans ${daysUntilVacation} jour${daysUntilVacation > 1 ? 's' : ''}...`;
+        // Before vacation
+        const daysUntil = Math.ceil((vacationStart - now) / (1000 * 60 * 60 * 24));
+        statusText = `Départ dans ${daysUntil} jour${daysUntil > 1 ? 's' : ''}`;
         realProgress = 0;
-        progressClass = 'pre-vacation';
     } else if (now >= vacationStart && now <= vacationEnd) {
-        // Pendant les vacances
+        // During vacation
         const daysElapsed = Math.floor((now - vacationStart) / (1000 * 60 * 60 * 24));
         const totalDays = Math.floor((vacationEnd - vacationStart) / (1000 * 60 * 60 * 24));
         const daysRemaining = totalDays - daysElapsed;
         statusText = `Jour ${daysElapsed + 1}/${totalDays} - ${daysRemaining} jour${daysRemaining > 1 ? 's' : ''} restant${daysRemaining > 1 ? 's' : ''}`;
-        progressClass = 'in-vacation';
     } else {
-        // Après les vacances
+        // After vacation
         const daysAfter = Math.floor((now - vacationEnd) / (1000 * 60 * 60 * 24));
-        statusText = `Vacances terminées depuis ${daysAfter} jour${daysAfter > 1 ? 's' : ''}`;
+        statusText = `De retour depuis ${daysAfter} jour${daysAfter > 1 ? 's' : ''}`;
         realProgress = 100;
-        progressClass = 'post-vacation';
     }
     
-    // Appliquer la classe CSS
-    progressFill.className = `progress-fill ${progressClass}`;
-    
-    // Animation progressive vers la valeur réelle
+    // Animate progress bar
     let currentProgress = 0;
-    const interval = setInterval(() => {
+    const animateProgress = () => {
         if (currentProgress < realProgress) {
             currentProgress += 1;
             progressFill.style.width = currentProgress + '%';
-        } else {
-            clearInterval(interval);
+            requestAnimationFrame(animateProgress);
         }
-    }, 50);
+    };
+    animateProgress();
     
-    // Mettre à jour le texte
-    progressText.textContent = statusText;
+    // Update text elements
+    if (progressText) progressText.textContent = statusText;
+    if (progressPercentage) progressPercentage.textContent = Math.round(realProgress) + '%';
 }
 
-// Glitch effect for random elements
-function addGlitchEffect() {
-    const elements = document.querySelectorAll('.neon-text, .error-code, .terminal-title');
+// Update days count
+function updateDaysCount() {
+    const daysElement = document.getElementById('days-count');
+    const vacationStart = new Date('2025-07-04');
+    const vacationEnd = new Date('2025-08-04');
+    const totalDays = Math.floor((vacationEnd - vacationStart) / (1000 * 60 * 60 * 24));
     
-    elements.forEach(element => {
-        setInterval(() => {
-            if (Math.random() < 0.1) { // 10% chance
-                element.classList.add('glitch');
-                setTimeout(() => {
-                    element.classList.remove('glitch');
-                }, 500);
-            }
-        }, 2000);
-    });
+    if (daysElement) {
+        daysElement.textContent = totalDays;
+    }
 }
 
-// Random modern commands
-function showRandomCommands() {
-    const commands = [
-        'vacation start --mode=relax',
-        'status check --current',
-        'notification disable --work',
-        'mode switch --to=beach',
-        'schedule clear --all',
-        'autoresponder enable',
-        'stress-level set --to=zero',
-        'fun-mode activate',
-        'work-mode suspend',
-        'energy recharge --full'
-    ];
+// Setup contact button functionality
+function setupContactButton() {
+    const contactBtn = document.getElementById('contact-btn');
     
-    const commandElement = document.querySelector('.command-text');
-    
-    setInterval(() => {
-        const randomCommand = commands[Math.floor(Math.random() * commands.length)];
-        commandElement.textContent = randomCommand;
-    }, 5000);
-}
-
-// Dynamic status updates
-function updateStatus() {
-    const statusValues = ['EN VACANCES', 'MODE DÉTENTE', 'PAUSE ACTIVE', 'RESSOURCEMENT', 'DÉCONNECTÉ'];
-    const statusElement = document.querySelector('.neon-green');
-    
-    setInterval(() => {
-        const randomStatus = statusValues[Math.floor(Math.random() * statusValues.length)];
-        statusElement.textContent = randomStatus;
-    }, 8000);
-}
-
-// Floating elements animation
-function animateFloatingElements() {
-    const floatingElements = document.querySelectorAll('.floating-elements > div');
-    
-    floatingElements.forEach(element => {
-        setInterval(() => {
-            const randomX = Math.random() * 20 - 10;
-            const randomY = Math.random() * 20 - 10;
-            element.style.transform += ` translate(${randomX}px, ${randomY}px)`;
-        }, 3000);
-    });
-}
-
-// Terminal typing effect
-function createTypingEffect() {
-    const typingElements = document.querySelectorAll('.typing-animation');
-    
-    typingElements.forEach(element => {
-        const text = element.textContent;
-        element.textContent = '';
-        
-        let i = 0;
-        const typeInterval = setInterval(() => {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-            } else {
-                clearInterval(typeInterval);
-                setTimeout(() => {
-                    element.textContent = '';
-                    i = 0;
-                    setTimeout(() => {
-                        const newTypeInterval = setInterval(() => {
-                            if (i < text.length) {
-                                element.textContent += text.charAt(i);
-                                i++;
-                            } else {
-                                clearInterval(newTypeInterval);
-                            }
-                        }, 100);
-                    }, 1000);
-                }, 2000);
-            }
-        }, 100);
-    });
-}
-
-// Add hover effects to terminal window
-function addHoverEffects() {
-    const terminalWindow = document.querySelector('.terminal-window');
-    
-    terminalWindow.addEventListener('mouseenter', () => {
-        terminalWindow.style.transform = 'scale(1.02)';
-        terminalWindow.style.transition = 'transform 0.3s ease';
-    });
-    
-    terminalWindow.addEventListener('mouseleave', () => {
-        terminalWindow.style.transform = 'scale(1)';
-    });
-}
-
-// Add click effects to buttons
-function addButtonEffects() {
-    const buttons = document.querySelectorAll('.btn');
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            button.style.transform = 'scale(1.2)';
-            button.style.transition = 'transform 0.1s ease';
+    if (contactBtn) {
+        contactBtn.addEventListener('click', () => {
+            // Create a simple modal or alert for contact
+            const modal = createContactModal();
+            document.body.appendChild(modal);
             
+            // Animate modal appearance
             setTimeout(() => {
-                button.style.transform = 'scale(1)';
-            }, 100);
-            
-            // Add some fun effects
-            if (button.classList.contains('red')) {
-                document.body.style.filter = 'hue-rotate(45deg)';
-                setTimeout(() => {
-                    document.body.style.filter = 'none';
-                }, 1000);
-            } else if (button.classList.contains('yellow')) {
-                document.body.style.filter = 'brightness(1.5)';
-                setTimeout(() => {
-                    document.body.style.filter = 'none';
-                }, 1000);
-            } else if (button.classList.contains('green')) {
-                document.body.style.filter = 'saturate(2)';
-                setTimeout(() => {
-                    document.body.style.filter = 'none';
-                }, 1000);
-            }
+                modal.style.opacity = '1';
+                modal.querySelector('.contact-modal').style.transform = 'scale(1)';
+            }, 10);
         });
-    });
+    }
 }
 
-// Generate modern vacation quotes
-function showVacationQuotes() {
-    const quotes = [
-        "Rechargement des batteries en cours... 🔋",
-        "Mode plage activé 🏖️",
-        "Détection de soleil et de détente... ☀️",
-        "Système de stress: DÉSACTIVÉ ✅",
-        "Niveau de relaxation: OPTIMAL 📈",
-        "Statut: Bronzage en cours... 🌞",
-        "Connexion WiFi: Optionnelle 📶",
-        "Mode avion: ACTIVÉ ✈️",
-        "Réveil: EN PAUSE ⏰",
-        "Emails: EN ATTENTE 📧"
-    ];
+// Create contact modal
+function createContactModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
     
-    const subMessageElement = document.querySelector('.sub-message');
+    const modalContent = document.createElement('div');
+    modalContent.className = 'contact-modal';
+    modalContent.style.cssText = `
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    `;
     
-    setInterval(() => {
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        subMessageElement.innerHTML = randomQuote + '<br>Profitez de cette pause bien méritée!';
-    }, 10000);
-}
-
-// Add konami code easter egg
-function addKonamiCode() {
-    let konamiCode = '';
-    const targetCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightKeyBKeyA';
+    modalContent.innerHTML = `
+        <h3 style="margin-bottom: 1rem; color: #1a1a1a; font-weight: 600;">Laisser un message</h3>
+        <p style="margin-bottom: 1.5rem; color: #64748b; line-height: 1.5;">
+            Je suis actuellement en vacances du 4 juillet au 4 août 2025. 
+            Vos messages seront traités à mon retour.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <button id="close-modal" style="
+                background: #667eea;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 50px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            ">Compris</button>
+        </div>
+    `;
     
-    document.addEventListener('keydown', (e) => {
-        konamiCode += e.code;
-        
-        if (konamiCode.length > targetCode.length) {
-            konamiCode = konamiCode.slice(-targetCode.length);
-        }
-        
-        if (konamiCode === targetCode) {
-            // Easter egg activated!
-            document.body.style.animation = 'rainbow 2s infinite';
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes rainbow {
-                    0% { filter: hue-rotate(0deg); }
-                    100% { filter: hue-rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(style);
-            
+    modal.appendChild(modalContent);
+    
+    // Close modal functionality
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.id === 'close-modal') {
+            modal.style.opacity = '0';
+            modalContent.style.transform = 'scale(0.8)';
             setTimeout(() => {
-                document.body.style.animation = 'none';
-                document.head.removeChild(style);
-            }, 10000);
-            
-            konamiCode = '';
+                modal.remove();
+            }, 300);
         }
     });
+    
+    return modal;
 }
 
-// Initialize all effects when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for CSS to load
-    setTimeout(() => {
-        createModernBackground();
-        updateUptime();
-        animateVacationProgress();
-        addGlitchEffect();
-        showRandomCommands();
-        updateStatus();
-        animateFloatingElements();
-        createTypingEffect();
-        addHoverEffects();
-        addButtonEffects();
-        showVacationQuotes();
-        addKonamiCode();
-    }, 1000);
-    
-    // Update uptime every minute
-    setInterval(updateUptime, 60000);
-    
-    // Update vacation progress every hour
-    setInterval(animateVacationProgress, 3600000);
+// Add some smooth scrolling effects
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Simple scroll to sections (if they exist)
+        const text = item.textContent.toLowerCase();
+        let targetSection;
+        
+        if (text === 'status') {
+            targetSection = document.querySelector('.cards-section');
+        } else if (text === 'contact') {
+            targetSection = document.querySelector('.info-section');
+        } else if (text === 'retour') {
+            targetSection = document.querySelector('.progress-section');
+        }
+        
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
 });
 
-// Add performance monitoring
-(function() {
-    let frameCount = 0;
-    let lastTime = performance.now();
+// Add some nice hover effects to cards
+document.querySelectorAll('.card, .info-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px)';
+    });
     
-    function monitorPerformance() {
-        frameCount++;
-        const currentTime = performance.now();
-        
-        if (currentTime - lastTime >= 1000) {
-            const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-            console.log(`FPS: ${fps}`);
-            frameCount = 0;
-            lastTime = currentTime;
-        }
-        
-        requestAnimationFrame(monitorPerformance);
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+    });
+});
+
+// Performance monitoring (simplified)
+let lastTime = performance.now();
+function monitorPerformance() {
+    const currentTime = performance.now();
+    const delta = currentTime - lastTime;
+    lastTime = currentTime;
+    
+    // Only log if performance issues detected
+    if (delta > 50) {
+        console.log('Performance note: Frame took', Math.round(delta), 'ms');
     }
     
     requestAnimationFrame(monitorPerformance);
-})();
+}
+
+requestAnimationFrame(monitorPerformance);

@@ -3,106 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mode Vacances - Actuellement Indisponible</title>
+    <title>En Vacances - Temporairement Indisponible</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="matrix-rain" id="matrix-rain"></div>
+    <div class="background-elements"></div>
     
     <div class="container">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <span class="btn red"></span>
-                    <span class="btn yellow"></span>
-                    <span class="btn green"></span>
-                </div>
-                <div class="terminal-title">Status Dashboard</div>
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🏖️</span>
+                <span class="logo-text">VacationMode</span>
             </div>
-            
-            <div class="terminal-content">
-                <div class="status-line">
-                    <span class="prompt">admin@vacances:~$</span>
-                    <span class="command">status --current</span>
-                </div>
-                
-                <div class="loading-container">
-                    <div class="loading-text">Vérification du statut en cours</div>
-                    <div class="loading-bar">
-                        <div class="loading-progress"></div>
+            <nav class="nav">
+                <span class="nav-item">STATUS</span>
+                <span class="nav-item">CONTACT</span>
+                <span class="nav-item">RETOUR</span>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="hero-section">
+                <h1 class="hero-title">
+                    Actuellement en<br>
+                    <span class="gradient-text">Mode Vacances</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Temporairement indisponible pour cause de ressourcement et de détente bien méritée.
+                </p>
+                <button class="cta-button" id="contact-btn">
+                    Laisser un message
+                </button>
+            </div>
+
+            <div class="cards-section">
+                <div class="card main-card">
+                    <div class="card-content">
+                        <div class="big-number" id="days-count">31</div>
+                        <div class="card-label">Jours de vacances</div>
                     </div>
                 </div>
                 
-                <div class="status-message">
-                    <div class="error-code">[STATUS: 418]</div>
-                    <div class="main-message">
-                        <span class="neon-text">ACTUELLEMENT EN VACANCES</span>
-                    </div>
-                    <div class="sub-message">
-                        Je suis actuellement en mode déconnecté<br>
-                        Processus de détente et de ressourcement en cours...
-                    </div>
-                </div>
-                
-                <div class="vacation-info">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label">Statut:</div>
-                            <div class="info-value neon-green">EN VACANCES</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Disponibilité:</div>
-                            <div class="info-value" id="uptime">∞ jours</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Retour:</div>
-                            <div class="info-value neon-cyan">BIENTÔT</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-section">
-                    <div class="contact-title">Moyens de Contact</div>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <span class="contact-icon">📧</span>
-                            <span class="contact-text">Messages différés acceptés</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-icon">⚡</span>
-                            <span class="contact-text">Réponse automatique activée</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="progress-section">
-                    <div class="progress-title">Progression des Vacances</div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="vacation-progress"></div>
-                        </div>
-                        <div class="progress-text">Rechargement en cours...</div>
-                    </div>
-                </div>
-                
-                <div class="footer-commands">
-                    <div class="command-line">
-                        <span class="prompt">admin@vacances:~$</span>
-                        <span class="command-text typing-animation">enjoy_vacation --relax-mode</span>
-                        <span class="cursor">|</span>
+                <div class="card secondary-card">
+                    <div class="card-content">
+                        <div class="medium-number" id="progress-percentage">42%</div>
+                        <div class="card-label">Progression</div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="floating-elements">
-            <div class="floating-code">Vacances en cours...</div>
-            <div class="floating-warning">🌴 Mode détente activé</div>
-            <div class="floating-status">● Temporairement absent</div>
-        </div>
+
+            <div class="info-section">
+                <div class="info-card">
+                    <div class="info-header">
+                        <span class="info-icon">📧</span>
+                        <span class="info-title">Messages</span>
+                    </div>
+                    <p class="info-text">Les messages sont automatiquement différés et traités à mon retour.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-header">
+                        <span class="info-icon">⚡</span>
+                        <span class="info-title">Urgences</span>
+                    </div>
+                    <p class="info-text">Pour les urgences, utilisez les moyens de contact alternatifs.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-header">
+                        <span class="info-icon">🔄</span>
+                        <span class="info-title">Retour</span>
+                    </div>
+                    <p class="info-text">Retour prévu le <strong>4 août 2025</strong> avec de nouveaux projets.</p>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h3 class="section-title">Progression des Vacances</h3>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="vacation-progress"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-text" id="progress-text">Rechargement en cours...</span>
+                        <span class="progress-date" id="progress-date">4 juillet - 4 août 2025</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span class="status-text">Temporairement absent</span>
+            </div>
+            <div class="footer-text">
+                Merci de votre compréhension 🌴
+            </div>
+        </footer>
     </div>
     
     <script src="script.js"></script>
