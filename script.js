@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     updateVacationProgress();
     updateDaysCount();
-    setupContactButton();
     
     // Update progress every hour
     setInterval(updateVacationProgress, 3600000);
@@ -74,97 +73,6 @@ function updateDaysCount() {
     }
 }
 
-// Setup contact button functionality
-function setupContactButton() {
-    const contactBtn = document.getElementById('contact-btn');
-    
-    if (contactBtn) {
-        contactBtn.addEventListener('click', () => {
-            // Create a simple modal or alert for contact
-            const modal = createContactModal();
-            document.body.appendChild(modal);
-            
-            // Animate modal appearance
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                modal.querySelector('.contact-modal').style.transform = 'scale(1)';
-            }, 10);
-        });
-    }
-}
-
-// Create contact modal
-function createContactModal() {
-    const modal = document.createElement('div');
-    modal.className = 'modal-overlay';
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    `;
-    
-    const modalContent = document.createElement('div');
-    modalContent.className = 'contact-modal';
-    modalContent.style.cssText = `
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-        padding: 2rem;
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
-        transform: scale(0.8);
-        transition: transform 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    `;
-    
-    modalContent.innerHTML = `
-        <h3 style="margin-bottom: 1rem; color: #1a1a1a; font-weight: 600;">Laisser un message 💌</h3>
-        <p style="margin-bottom: 1.5rem; color: #64748b; line-height: 1.5;">
-            Je suis actuellement en mode vacances du 4 juillet au 4 août 2025. 
-            Vos messages seront traités à mon retour avec un grand sourire ! 😊
-        </p>
-        <div style="display: flex; gap: 1rem; justify-content: center;">
-            <button id="close-modal" style="
-                background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-                color: white;
-                border: none;
-                padding: 0.75rem 1.5rem;
-                border-radius: 25px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-            ">Compris ! 🌟</button>
-        </div>
-    `;
-    
-    modal.appendChild(modalContent);
-    
-    // Close modal functionality
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal || e.target.id === 'close-modal') {
-            modal.style.opacity = '0';
-            modalContent.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-                modal.remove();
-            }, 300);
-        }
-    });
-    
-    return modal;
-}
-
 // Add some smooth scrolling effects
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', (e) => {
@@ -174,10 +82,8 @@ document.querySelectorAll('.nav-item').forEach(item => {
         const text = item.textContent.toLowerCase();
         let targetSection;
         
-        if (text === 'status') {
+        if (text === 'statut') {
             targetSection = document.querySelector('.cards-section');
-        } else if (text === 'contact') {
-            targetSection = document.querySelector('.info-section');
         } else if (text === 'retour') {
             targetSection = document.querySelector('.progress-section');
         }
