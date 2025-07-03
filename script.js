@@ -1,11 +1,12 @@
 // Modern vacation page functionality
 document.addEventListener('DOMContentLoaded', () => {
-    // Envoyer la notification de visite de manière sécurisée
-    sendSecureNotification();
-    
+    // Mettre à jour immédiatement les éléments de la page
+    updateStatusIndicator(); // PRIORITÉ : mettre à jour le statut en premier
     updateVacationProgress();
     updateDaysCount();
-    updateStatusIndicator(); // Nouveau : mettre à jour le statut
+    
+    // Envoyer la notification de visite de manière sécurisée
+    sendSecureNotification();
     
     // Update progress every hour
     setInterval(() => {
@@ -124,7 +125,20 @@ function updateStatusIndicator() {
     const vacationEnd = new Date('2025-08-04');
     const now = new Date();
     
-    if (!statusText || !statusDot) return;
+    // Debug : afficher les dates dans la console
+    console.log('Dates debug:', {
+        now: now.toLocaleDateString('fr-FR'),
+        vacationStart: vacationStart.toLocaleDateString('fr-FR'),
+        vacationEnd: vacationEnd.toLocaleDateString('fr-FR'),
+        beforeVacation: now < vacationStart,
+        duringVacation: now >= vacationStart && now <= vacationEnd,
+        afterVacation: now > vacationEnd
+    });
+    
+    if (!statusText || !statusDot) {
+        console.error('Éléments de statut non trouvés');
+        return;
+    }
     
     if (now < vacationStart) {
         // Avant les vacances
@@ -132,6 +146,7 @@ function updateStatusIndicator() {
         statusText.textContent = `Départ dans ${daysUntil} jour${daysUntil > 1 ? 's' : ''}`;
         statusDot.style.background = '#ffd93d'; // Jaune pour "bientôt absent"
         statusDot.style.boxShadow = '0 0 15px rgba(255, 217, 61, 0.5)';
+        console.log(`Status: Avant vacances - ${daysUntil} jours restants`);
     } else if (now >= vacationStart && now <= vacationEnd) {
         // Pendant les vacances
         const daysElapsed = Math.floor((now - vacationStart) / (1000 * 60 * 60 * 24));
@@ -145,6 +160,7 @@ function updateStatusIndicator() {
         }
         statusDot.style.background = '#ff6b6b'; // Rouge pour "absent"
         statusDot.style.boxShadow = '0 0 15px rgba(255, 107, 107, 0.5)';
+        console.log(`Status: Pendant vacances - ${daysRemaining} jours restants`);
     } else {
         // Après les vacances
         const daysAfter = Math.floor((now - vacationEnd) / (1000 * 60 * 60 * 24));
@@ -157,6 +173,7 @@ function updateStatusIndicator() {
         }
         statusDot.style.background = '#4ecdc4'; // Vert pour "disponible"
         statusDot.style.boxShadow = '0 0 15px rgba(78, 205, 196, 0.5)';
+        console.log(`Status: Après vacances - retour depuis ${daysAfter} jours`);
     }
 }
 
