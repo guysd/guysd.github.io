@@ -345,16 +345,38 @@ body {
     background: linear-gradient(90deg, #ffff00, #ff6b6b, #00ff00, #00ffff);
     width: 0%;
     border-radius: 15px;
-    animation: vacation-progress 10s ease-in-out infinite;
+    transition: width 0.3s ease;
+    position: relative;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
 }
 
-@keyframes vacation-progress {
-    0% { width: 0%; }
-    25% { width: 35%; }
-    50% { width: 65%; }
-    75% { width: 85%; }
-    100% { width: 95%; }
+/* Différents états de progression */
+.progress-fill.pre-vacation {
+    background: linear-gradient(90deg, #666, #888);
+    box-shadow: 0 0 15px rgba(102, 102, 102, 0.5);
 }
+
+.progress-fill.in-vacation {
+    background: linear-gradient(90deg, #ffff00, #ff6b6b, #00ff00, #00ffff);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+    animation: vacation-glow 2s ease-in-out infinite alternate;
+}
+
+.progress-fill.post-vacation {
+    background: linear-gradient(90deg, #00ff00, #00ffff);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+@keyframes vacation-glow {
+    0% { 
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+    }
+    100% { 
+        box-shadow: 0 0 25px rgba(255, 255, 0, 1), 0 0 35px rgba(0, 255, 255, 0.5);
+    }
+}
+
+/* Suppression de l'ancienne animation remplacée par le système dynamique */
 
 .progress-text {
     text-align: center;
