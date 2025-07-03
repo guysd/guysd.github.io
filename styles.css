@@ -55,9 +55,13 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
     position: relative;
     z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Header */
@@ -65,12 +69,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1rem 1.5rem;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
     animation: slideDown 0.8s ease-out;
 }
@@ -155,9 +159,10 @@ body {
 /* Hero Section */
 .hero-section {
     text-align: center;
-    margin-bottom: 4rem;
-    padding: 3rem 0;
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
     animation: fadeInUp 1s ease-out 0.2s both;
+    flex-shrink: 0;
 }
 
 @keyframes fadeInUp {
@@ -172,11 +177,11 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 800;
     color: white;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     animation: titleGlow 3s ease-in-out infinite;
 }
@@ -205,30 +210,31 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
     font-weight: 400;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 /* Cards Section */
 .cards-section {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-    margin-bottom: 4rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
     animation: fadeInUp 1s ease-out 0.4s both;
+    flex-shrink: 0;
 }
 
 .card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 2.5rem;
+    border-radius: 15px;
+    padding: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     position: relative;
@@ -276,10 +282,10 @@ body {
 }
 
 .big-number {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
     font-weight: 900;
     color: white;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     animation: numberGlow 3s ease-in-out infinite;
 }
@@ -294,16 +300,16 @@ body {
 }
 
 .medium-number {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
     font-weight: 800;
     color: white;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     animation: numberGlow 3s ease-in-out infinite 0.5s;
 }
 
 .card-label {
-    font-size: 1.1rem;
+    font-size: clamp(0.8rem, 2vw, 1rem);
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
 }
@@ -311,21 +317,24 @@ body {
 /* Info Section */
 .info-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
     animation: fadeInUp 1s ease-out 0.6s both;
+    flex: 1;
+    min-height: 0;
 }
 
 .info-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 2rem;
+    border-radius: 15px;
+    padding: 1.25rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     position: relative;
     animation: cardFloat 8s ease-in-out infinite;
+    height: fit-content;
 }
 
 .info-card:nth-child(1) { animation-delay: 0s; }
@@ -341,12 +350,12 @@ body {
 .info-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
 .info-icon {
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     animation: iconBounce 2s ease-in-out infinite;
 }
 
@@ -360,15 +369,16 @@ body {
 }
 
 .info-title {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     font-weight: 600;
     color: white;
 }
 
 .info-text {
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
+    line-height: 1.4;
     font-weight: 400;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
 .info-text strong {
@@ -380,18 +390,19 @@ body {
 .progress-section {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 2.5rem;
+    border-radius: 15px;
+    padding: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     animation: fadeInUp 1s ease-out 0.8s both;
+    flex-shrink: 0;
 }
 
 .section-title {
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: 700;
     color: white;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: center;
     animation: titleGlow 3s ease-in-out infinite;
 }
@@ -403,11 +414,11 @@ body {
 
 .progress-bar {
     width: 100%;
-    height: 12px;
+    height: 10px;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     position: relative;
 }
 
@@ -415,7 +426,7 @@ body {
     height: 100%;
     background: linear-gradient(90deg, #ff6b6b, #ffd93d, #4ecdc4);
     background-size: 200% 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     transition: width 0.5s ease;
     position: relative;
     animation: progressGlow 3s ease-in-out infinite;
@@ -453,17 +464,17 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .progress-text {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     font-weight: 600;
     color: white;
 }
 
 .progress-date {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
     color: rgba(255, 255, 255, 0.7);
     font-weight: 500;
 }
@@ -473,24 +484,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem 1.5rem;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 2rem;
     animation: fadeInUp 1s ease-out 1s both;
+    flex-shrink: 0;
 }
 
 .status-indicator {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .status-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: #ff6b6b;
     border-radius: 50%;
     animation: statusPulse 2s infinite;
@@ -511,6 +522,7 @@ body {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     animation: textGlow 4s ease-in-out infinite;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
 @keyframes textGlow {
@@ -526,67 +538,127 @@ body {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     animation: textGlow 4s ease-in-out infinite 1s;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 1rem;
+        padding: 0.75rem;
+        min-height: 100vh;
     }
     
     .header {
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.75rem;
         text-align: center;
+        padding: 0.75rem 1rem;
     }
     
     .nav {
         gap: 1rem;
     }
     
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
+    .hero-section {
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
     }
     
     .cards-section {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
     }
     
     .info-section {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
     }
     
     .progress-info {
         flex-direction: column;
         text-align: center;
+        gap: 0.25rem;
     }
     
     .footer {
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.5rem;
         text-align: center;
+        padding: 0.75rem 1rem;
     }
     
-    .big-number {
-        font-size: 3rem;
+    .card {
+        padding: 1rem;
     }
     
-    .medium-number {
-        font-size: 2rem;
+    .info-card {
+        padding: 1rem;
+    }
+    
+    .progress-section {
+        padding: 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .header {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .hero-section {
+        padding: 0.25rem 0;
+        margin-bottom: 0.75rem;
     }
     
     .card {
+        padding: 0.75rem;
+    }
+    
+    .info-card {
+        padding: 0.75rem;
+    }
+    
+    .progress-section {
+        padding: 0.75rem;
+    }
+    
+    .footer {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+@media (min-height: 800px) {
+    .container {
         padding: 1.5rem;
+    }
+    
+    .header {
+        padding: 1.25rem 1.75rem;
+    }
+    
+    .hero-section {
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .cards-section {
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .info-section {
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .card {
+        padding: 2rem;
     }
     
     .info-card {
@@ -594,7 +666,12 @@ body {
     }
     
     .progress-section {
-        padding: 1.5rem;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer {
+        padding: 1.25rem 1.75rem;
     }
 }
 
