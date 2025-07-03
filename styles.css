@@ -204,11 +204,6 @@ body {
     50% { background-position: 100% 50%; }
 }
 
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
 .hero-subtitle {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.8);
