@@ -129,22 +129,23 @@ function createContactModal() {
     `;
     
     modalContent.innerHTML = `
-        <h3 style="margin-bottom: 1rem; color: #1a1a1a; font-weight: 600;">Contact</h3>
+        <h3 style="margin-bottom: 1rem; color: #1a1a1a; font-weight: 600;">Laisser un message 💌</h3>
         <p style="margin-bottom: 1.5rem; color: #64748b; line-height: 1.5;">
-            Je suis actuellement en congés du 4 juillet au 4 août 2025. 
-            Vos messages seront traités à mon retour.
+            Je suis actuellement en mode vacances du 4 juillet au 4 août 2025. 
+            Vos messages seront traités à mon retour avec un grand sourire ! 😊
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center;">
             <button id="close-modal" style="
-                background: #4a5568;
+                background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
                 color: white;
                 border: none;
                 padding: 0.75rem 1.5rem;
-                border-radius: 8px;
+                border-radius: 25px;
                 font-weight: 600;
                 cursor: pointer;
-                transition: background 0.3s ease;
-            ">Compris</button>
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            ">Compris ! 🌟</button>
         </div>
     `;
     
