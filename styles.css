@@ -505,6 +505,8 @@ body {
     background: #ff6b6b;
     border-radius: 50%;
     animation: statusPulse 2s infinite;
+    transition: all 0.5s ease; /* Transition fluide pour le changement de couleur */
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
 }
 
 @keyframes statusPulse {
@@ -523,6 +525,7 @@ body {
     font-weight: 500;
     animation: textGlow 4s ease-in-out infinite;
     font-size: clamp(0.8rem, 2vw, 0.9rem);
+    transition: all 0.3s ease; /* Transition fluide pour les changements */
 }
 
 @keyframes textGlow {

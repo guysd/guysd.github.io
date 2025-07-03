@@ -1,0 +1,11 @@
+{
+  "name": "vacation-page",
+  "version": "1.0.0",
+  "description": "Page de vacances sécurisée",
+  "dependencies": {
+    "nodemailer": "^6.9.0"
+  },
+  "scripts": {
+    "build": "echo 'Build completed'"
+  }
+}
